@@ -1,6 +1,6 @@
 -- Completar con los datos del grupo
 --
--- Nombre de Grupo: xx
+-- Nombre de Grupo: Algorritmos
 -- Integrante 1: Nombre Apellido, email, LU
 -- Integrante 2: Nombre Apellido, email, LU
 -- Integrante 3: Nombre Apellido, email, LU
@@ -37,7 +37,7 @@ likesDePublicacion (_, _, us) = us
 -- Ejercicios
 
 nombresDeUsuarios :: RedSocial -> [String]
-nombresDeUsuarios = undefined
+nombresDeUsuarios = undefined  
 
 -- describir qué hace la función: .....
 amigosDe :: RedSocial -> Usuario -> [Usuario]
