@@ -37,7 +37,7 @@ likesDePublicacion (_, _, us) = us
 -- Ejercicios
 
 nombresDeUsuarios :: RedSocial -> [String]
-nombresDeUsuarios red = extraeNombresDeUsuario (usuarios red)
+nombresDeUsuarios red = undefined
 
 extraeNombresDeUsuario :: [Usuario] -> [String]
 extraeNombresDeUsuario = undefined  
