@@ -1,5 +1,4 @@
 module Modules.Ejemplos where
-
 usuario1 = (1, "Juan")
 usuario2 = (2, "Natalia")
 usuario3 = (3, "Pedro")
