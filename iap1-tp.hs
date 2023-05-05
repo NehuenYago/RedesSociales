@@ -1,4 +1,3 @@
-import Ejemplos     
 -- Completar con los datos del grupo
 --
 -- Nombre de Grupo: Algorritmos
@@ -41,8 +40,7 @@ nombresDeUsuarios :: RedSocial -> [String]
 nombresDeUsuarios red = extraeNombresDeUsuario (usuarios red)
 
 extraeNombresDeUsuario :: [Usuario] -> [String]
-extraeNombresDeUsuario [] = []
-extraeNombresDeUsuario (x:xs) = nombreDeUsuario x : extraeNombresDeUsuario xs    
+extraeNombresDeUsuario = undefined  
 
 -- describir qué hace la función: .....
 amigosDe :: RedSocial -> Usuario -> [Usuario]
