@@ -18,6 +18,6 @@ pertenece y (x:xs)
     | otherwise = pertenece y xs
 
 -- devuelve la cantidad de elementos que tiene una lista. (igual a length)
-longitud :: [t] -> Integer
+longitud :: [t] -> Int
 longitud [] = 0
 longitud (_:xs) = 1 + longitud xs
