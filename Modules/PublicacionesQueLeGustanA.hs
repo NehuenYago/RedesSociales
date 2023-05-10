@@ -16,7 +16,7 @@ tomaPublicacion listaPublicaciones usuario n
 -- si encuentra que le dio like, lo concatena con el resultado de verificar los likes en la siguiente publicacion
 -- si no encuentra que el usuario buscado le dio like, pasa a la siguiente publicacion ()
 buscaLikes :: [Publicacion] -> Int -> Publicacion -> Usuario -> [Publicacion]
-buscaLikes listaPublicaciones n (u, post, []) usuario = tomaPublicacion listaPublicaciones usuario (n+1)
+buscaLikes listaPublicaciones n (_, _, []) usuario = tomaPublicacion listaPublicaciones usuario (n+1)
 buscaLikes listaPublicaciones n (u, post, l:ls) usuario
  | l == usuario = (listaPublicaciones !! n) : tomaPublicacion listaPublicaciones usuario (n+1)
  | otherwise = buscaLikes listaPublicaciones n (u, post, ls) usuario
