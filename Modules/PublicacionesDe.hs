@@ -1,8 +1,9 @@
 module Modules.PublicacionesDe where
 import Modules.FuncionesBase
+import Modules.FuncionesAuxiliares
 
 publicacionesDe :: RedSocial -> Usuario -> [String]
-publicacionesDe red u = publicacionesDeAux (publicaciones red) u 0
+publicacionesDe red u = eliminarRepetidos (publicacionesDeAux (publicaciones red) u 0)
 
 publicacionesDeAux :: [Publicacion] -> Usuario -> Int -> [String]
 publicacionesDeAux listaPublicaciones u n
