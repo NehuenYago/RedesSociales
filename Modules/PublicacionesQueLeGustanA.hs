@@ -1,5 +1,6 @@
 module Modules.PublicacionesQueLeGustanA where
 import Modules.FuncionesBase
+import Modules.FuncionesAuxiliares
 
 -- le envia a tomaPublicacion la lista de publicaciones de la red
 publicacionesQueLeGustanA :: RedSocial -> Usuario -> [Publicacion]
@@ -8,7 +9,7 @@ publicacionesQueLeGustanA red usuario = tomaPublicacion (publicaciones red) usua
 -- envia a buscaLikes uno a uno todos los elementos de listaPublicaciones, que es la lista de las publicaciones de la red
 tomaPublicacion :: [Publicacion] -> Usuario -> Int -> [Publicacion]
 tomaPublicacion listaPublicaciones usuario n
- | n >= length listaPublicaciones = []
+ | n >= longitud listaPublicaciones = []
  | otherwise = buscaLikes listaPublicaciones n (listaPublicaciones !! n) usuario
 
 -- recibe una publicacion y compara al usuario de quien quiero saber los "me gusta" con los likes de dicha publicacion
