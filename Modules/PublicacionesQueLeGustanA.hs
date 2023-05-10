@@ -4,7 +4,7 @@ import Modules.FuncionesAuxiliares
 
 -- le envia a tomaPublicacion la lista de publicaciones de la red
 publicacionesQueLeGustanA :: RedSocial -> Usuario -> [Publicacion]
-publicacionesQueLeGustanA red usuario = tomaPublicacion (publicaciones red) usuario 0
+publicacionesQueLeGustanA red usuario = eliminarRepetidos (tomaPublicacion (publicaciones red) usuario 0)
 
 -- envia a buscaLikes uno a uno todos los elementos de listaPublicaciones, que es la lista de las publicaciones de la red
 tomaPublicacion :: [Publicacion] -> Usuario -> Int -> [Publicacion]
