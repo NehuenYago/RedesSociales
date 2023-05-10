@@ -26,3 +26,15 @@ longitud (_:xs) = 1 + longitud xs
 devuelveElemento :: [t] -> Int -> t
 devuelveElemento (x:_) 0 = x
 devuelveElemento (x:xs) n = devuelveElemento xs (n-1)
+
+-- elimina todos los elementos e de la lista (x:xs)
+quitarTodos :: (Eq t) => t -> [t] -> [t]
+quitarTodos _ [] = []
+quitarTodos e (x:xs)
+ | e == x = quitarTodos e xs
+ | otherwise = x : quitarTodos e xs
+
+-- elimina unicamente los elementos repetidos de la lista
+eliminarRepetidos :: (Eq t) => [t] -> [t]
+eliminarRepetidos [] = []
+eliminarRepetidos (x:xs) = x : (eliminarRepetidos (quitarTodos x xs))
