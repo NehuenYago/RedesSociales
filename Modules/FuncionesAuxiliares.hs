@@ -16,3 +16,25 @@ pertenece _ [] = False
 pertenece y (x:xs) 
     | y == x = True
     | otherwise = pertenece y xs
+
+-- devuelve la cantidad de elementos que tiene una lista. (igual a length)
+longitud :: [t] -> Int
+longitud [] = 0
+longitud (_:xs) = 1 + longitud xs
+
+-- devuelve el elemento que se encuentra en la posicion n del array. (igual a !!)
+devuelveElemento :: [t] -> Int -> t
+devuelveElemento (x:_) 0 = x
+devuelveElemento (x:xs) n = devuelveElemento xs (n-1)
+
+-- elimina todos los elementos e de la lista (x:xs)
+quitarTodos :: (Eq t) => t -> [t] -> [t]
+quitarTodos _ [] = []
+quitarTodos e (x:xs)
+ | e == x = quitarTodos e xs
+ | otherwise = x : quitarTodos e xs
+
+-- elimina unicamente los elementos repetidos de la lista
+eliminarRepetidos :: (Eq t) => [t] -> [t]
+eliminarRepetidos [] = []
+eliminarRepetidos (x:xs) = x : (eliminarRepetidos (quitarTodos x xs))
