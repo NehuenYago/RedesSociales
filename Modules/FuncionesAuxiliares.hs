@@ -21,3 +21,8 @@ pertenece y (x:xs)
 longitud :: [t] -> Int
 longitud [] = 0
 longitud (_:xs) = 1 + longitud xs
+
+-- devuelve el elemento que se encuentra en la posicion n del array. (igual a !!)
+devuelveElemento :: [t] -> Int -> t
+devuelveElemento (x:_) 0 = x
+devuelveElemento (x:xs) n = devuelveElemento xs (n-1)
