@@ -2,7 +2,8 @@ module Modules.PublicacionesQueLeGustanA where
 import Modules.FuncionesBase
 import Modules.FuncionesAuxiliares
 
--- le envia a tomaPublicacion la lista de publicaciones de la red
+-- le envia a tomaPublicacion la lista de publicaciones de la red y elimina los repetidos de la lista de
+-- publicaciones que recibe
 publicacionesQueLeGustanA :: RedSocial -> Usuario -> [Publicacion]
 publicacionesQueLeGustanA red usuario = eliminarRepetidos (tomaPublicacion (publicaciones red) usuario 0)
 
