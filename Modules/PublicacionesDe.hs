@@ -11,7 +11,7 @@ publicacionesDe red u = eliminarRepetidos (enviaPublicacion (publicaciones red) 
 -- envia uno a uno los elementos de listaPublicaciones a comparaUsuario
 enviaPublicacion :: [Publicacion] -> Usuario -> Int -> [Publicacion]
 enviaPublicacion listaPublicaciones u n
- | n >= length listaPublicaciones = []
+ | n >= longitud listaPublicaciones = []
  | otherwise = comparaUsuario (devuelveElemento listaPublicaciones n) listaPublicaciones u n
 
 -- si el usuario pedido es el mismo que el de la publicacion, lo concatena con lo
