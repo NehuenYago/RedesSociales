@@ -2,6 +2,7 @@ module Modules.UsuarioConMasAmigos where
 import Modules.FuncionesBase
 import Modules.CantidadDeAmigos
 
+-- devuelve el usuario de una red con la mayor cantidad de amigos
 usuarioConMasAmigos :: RedSocial -> Usuario
 usuarioConMasAmigos ([], _, _) = error "La red social no tiene usuarios"
 usuarioConMasAmigos (u : us, rels, pubs) = maximaCantidadDeAmigos (cantidadDeAmigosPorUsuario (u : us, rels, pubs))
