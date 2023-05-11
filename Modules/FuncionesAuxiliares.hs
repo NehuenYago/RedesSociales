@@ -45,6 +45,7 @@ verificaElementosEnComun [] = []
 verificaElementosEnComun [l] = l
 verificaElementosEnComun (l:ls) = interseccion l (verificaElementosEnComun ls)
     where
+        -- devuelve la interseccion (los elementos comunes) entre dos listas
         interseccion [] _ = []
         interseccion (x:xs) ys 
             | pertenece x ys = x : interseccion xs ys
