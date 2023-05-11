@@ -8,7 +8,7 @@ import Modules.FuncionesAuxiliares
 -- si en cada lista de likes de cada publicacion encuentro a un mismo usuario entonces este ultimo es un seguidor fiel del primero
 
 tieneUnSeguidorFiel :: RedSocial -> Usuario -> Bool
-tieneUnSeguidorFiel red us = tieneElementosEnComun (listaDeLikes (publicaciones red us))
+tieneUnSeguidorFiel red us = tieneElementosEnComun (listaDeLikes (publicacionesDe red us))
 
 listaDeLikes :: [Publicacion] -> [[Usuario]]
 listaDeLikes [] = error "El usuario no tiene publiaciones"
@@ -27,4 +27,4 @@ verificaElementosEnComun (l:ls) = interseccion l (verificaElementosEnComun ls)
             | otherwise = interseccion xs ys
 
 tieneElementosEnComun :: (Eq a) => [[a]] -> Bool
-tieneElementosEnComun listaDeListas = not (length (verificaElementosEnComun listaDeListas) == 0)
+tieneElementosEnComun listaDeListas = not (longitud (verificaElementosEnComun listaDeListas) == 0)
