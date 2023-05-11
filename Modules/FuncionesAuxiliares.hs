@@ -38,3 +38,19 @@ quitarTodos e (x:xs)
 eliminarRepetidos :: (Eq t) => [t] -> [t]
 eliminarRepetidos [] = []
 eliminarRepetidos (x:xs) = x : (eliminarRepetidos (quitarTodos x xs))
+
+-- toma una lista de listas y devuelve una lista con los elementos comunes a todas
+verificaElementosEnComun :: (Eq a) => [[a]] -> [a]
+verificaElementosEnComun [] = []
+verificaElementosEnComun [l] = l
+verificaElementosEnComun (l:ls) = interseccion l (verificaElementosEnComun ls)
+    where
+        -- devuelve la interseccion (los elementos comunes) entre dos listas
+        interseccion [] _ = []
+        interseccion (x:xs) ys 
+            | pertenece x ys = x : interseccion xs ys
+            | otherwise = interseccion xs ys
+
+-- determina si una lista de listas tiene elementos en comun en todas las sublistas
+tieneElementosEnComun :: (Eq a) => [[a]] -> Bool
+tieneElementosEnComun listaDeListas = not (longitud (verificaElementosEnComun listaDeListas) == 0)
