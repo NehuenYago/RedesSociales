@@ -8,9 +8,6 @@ amigosDe (usrs, rels, pubs) us = amigosDeAux rels us
 amigosDeAux :: [Relacion] -> Usuario -> [Usuario]
 amigosDeAux [] _ = []
 amigosDeAux (rel:rels) us
-    | longitud rels == 0 && us2 == us = [us1]
-    | longitud rels == 0 && us1 == us = [us2]
-    | longitud rels == 0 = []
     | us2 == us = us1:amigosDeAux rels us
     | us1 == us = us2:amigosDeAux rels us
     | otherwise = amigosDeAux rels us
