@@ -1,6 +1,7 @@
 module TestCatedra where
 import Test.HUnit
 import Solucion
+import RedSocial
 
 main = runTestTT tests
 
