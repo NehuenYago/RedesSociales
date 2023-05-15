@@ -4,7 +4,10 @@ import Modules.CantidadDeAmigos
 import Modules.FuncionesBase
 
 estaRobertoCarlos :: RedSocial -> Bool
-estaRobertoCarlos red = any (masDeUnMillonDeAmigos red) (usuarios red)
+estaRobertoCarlos red = aux (usuarios red)
+  where
+    aux [] = False
+    aux (u:us) = masDeUnMillonDeAmigos red u || aux us
 
 masDeUnMillonDeAmigos :: RedSocial -> Usuario -> Bool
-masDeUnMillonDeAmigos red u = cantidadDeAmigos red u > 1000000
+masDeUnMillonDeAmigos red u = cantidadDeAmigos red u >= 10
