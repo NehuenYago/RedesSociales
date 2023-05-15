@@ -1,5 +1,6 @@
 module RedSocial where
 
+import Modules.Tests
 import Modules.FuncionesBase
 import Modules.FuncionesAuxiliares
 import Modules.Ejemplos
