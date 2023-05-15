@@ -39,6 +39,22 @@ eliminarRepetidos :: (Eq t) => [t] -> [t]
 eliminarRepetidos [] = []
 eliminarRepetidos (x:xs) = x : (eliminarRepetidos (quitarTodos x xs))
 
+-- agrega un elemento a una lista y elimina los repetidos que pudiesen existir
+agregarSinRepetidos :: (Eq t) => t -> [t] -> [t]
+agregarSinRepetidos x xs = eliminarRepetidos (x:xs)
+
+-- concatena dos lista y elimina los repetidos que pudiesen existir
+unirSinRepetidos :: (Eq t) => [t] -> [t] -> [t]
+unirSinRepetidos xs ys = eliminarRepetidos (xs ++ ys)
+
+-- devuelve el primer elemento de una dupla
+primeroDeDupla :: (tx, ty) -> tx
+primeroDeDupla (x, y) = x
+
+--devuleve el segundo de una dupla
+segundoDeDupla :: (tx, ty) -> ty
+segundoDeDupla (x, y) = y
+
 -- toma una lista de listas y devuelve una lista con los elementos comunes a todas
 verificaElementosEnComun :: (Eq a) => [[a]] -> [a]
 verificaElementosEnComun [] = []
