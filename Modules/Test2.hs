@@ -30,8 +30,8 @@ usuario2_6 = (6, "Juan")
 relacion2_1_2 = (usuario2_1, usuario2_2)
 relacion2_1_3 = (usuario2_1, usuario2_3)
 relacion2_1_4 = (usuario2_1, usuario2_4)
-relacion2_1_5 = (usuario2_5, usuario2_5)
-relacion2_1_6 = (usuario2_6, usuario2_6)
+relacion2_1_5 = (usuario2_1, usuario2_5)
+relacion2_1_6 = (usuario2_1, usuario2_6)
 relacion2_2_3 = (usuario2_2, usuario2_3)
 relacion2_2_4 = (usuario2_2, usuario2_4)
 relacion2_2_5 = (usuario2_2, usuario2_5)
@@ -41,14 +41,14 @@ relacion2_3_5 = (usuario2_3, usuario2_5)
 relacion2_3_6 = (usuario2_3, usuario2_6)
 relacion2_4_5 = (usuario2_4, usuario2_5)
 relacion2_4_6 = (usuario2_4, usuario2_6)
-relacion2_5_6 = (usuario2_5, usuario2_5)
+relacion2_5_6 = (usuario2_5, usuario2_6)
 
-red2 = ([usuario2_1, usuario2_3, usuario2_5, usuario2_6], [relacion2_1_3, relacion2_1_5, relacion2_3_5], [])
+red2 = ([usuario2_1, usuario2_3, usuario2_5, usuario2_6], [relacion2_1_3, relacion2_1_5, relacion2_2_5], [])
 
 test2 = test [
     " amigosDe usuario sin amigos" ~: amigosDe red2 usuario2_6 ~?= [],
 
-    " amigosDe usuario con un solo amigo" ~: amigosDe red2 usuario2_3 ~?= [usuario2_5],
+    " amigosDe usuario con un solo amigo" ~: amigosDe red2 usuario2_3 ~?= [usuario2_1],
 
     " amigosDe usuario con multiples amigos" ~: amigosDe red2 usuario2_1 ~?= [usuario2_3, usuario2_5]
  ]
