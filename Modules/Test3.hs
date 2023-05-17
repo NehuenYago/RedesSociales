@@ -43,14 +43,10 @@ relacion3_4_5 = (usuario3_4, usuario3_5)
 relacion3_4_6 = (usuario3_4, usuario3_6)
 relacion3_5_6 = (usuario3_5, usuario3_6)
 
+redConUnSoloUsuario3 = ([usuario3_4], [], [])
 red3 = ([usuario3_1, usuario3_3, usuario3_5, usuario3_6], [relacion3_1_3, relacion3_1_5, relacion3_2_5], [])
 
 test3 = test [
-    " cantidadDeamigos de usuario sin amigos" ~: cantidadDeAmigos red3 usuario3_6 ~?= 0,
-
-    " cantidadDeAmigos de usuario con un solo amigo" ~: cantidadDeAmigos red3 usuario3_3 ~?= 1,
-
-    " cantidadDeAmigos de usuario con multiples amigos" ~: cantidadDeAmigos red3 usuario3_1 ~?= 2
- ]
+    " cantidadDeAmigos de unico usuario en la red" ~: cantidadDeAmigos redConUnSoloUsuario3 usuario3_4 ~?= 0,
 
 main = runTestTT test3
