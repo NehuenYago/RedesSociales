@@ -1,4 +1,4 @@
-module Modules.TestN where
+module Modules.Test2 where
 
 -- Funciones y ejemplos
 import Modules.FuncionesBase
