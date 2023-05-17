@@ -54,5 +54,6 @@ test2 = test [
     " amigosDe usuario con un solo amigo en una red con relaciones" ~: amigosDe red2 usuario2_3 ~?= [usuario2_1],
 
     " amigosDe usuario con multiples amigos en una red con relaciones" ~: amigosDe red2 usuario2_1 ~?= [usuario2_3, usuario2_5]
+ ]
 
 main = runTestTT test2
