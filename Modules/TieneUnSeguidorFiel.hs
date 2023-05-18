@@ -12,6 +12,21 @@ tieneUnSeguidorFiel red us = tieneElementosEnComun (listaDeLikes (publicacionesD
 
 -- me devuelve una lista de listas de likes de las publiaciones del usuario
 listaDeLikes :: [Publicacion] -> [[Usuario]]
-listaDeLikes [] = error "El usuario no tiene publiaciones"
 listaDeLikes [(_, _, lk)] = [lk]
 listaDeLikes ((_, _, lk) : xs) = lk : listaDeLikes xs
+
+-- toma una lista de listas y devuelve una lista con los elementos comunes a todas
+verificaElementosEnComun :: (Eq a) => [[a]] -> [a]
+verificaElementosEnComun [] = []
+verificaElementosEnComun [l] = l
+verificaElementosEnComun (l:ls) = interseccion l (verificaElementosEnComun ls)
+    where
+        -- devuelve la interseccion (los elementos comunes) entre dos listas
+        interseccion [] _ = []
+        interseccion (x:xs) ys 
+            | pertenece x ys = x : interseccion xs ys
+            | otherwise = interseccion xs ys
+
+-- determina si una lista de listas tiene elementos en comun en todas las sublistas
+tieneElementosEnComun :: (Eq a) => [[a]] -> Bool
+tieneElementosEnComun listaDeListas = not (longitud (verificaElementosEnComun listaDeListas) == 0)
