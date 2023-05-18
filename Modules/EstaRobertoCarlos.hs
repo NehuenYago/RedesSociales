@@ -10,4 +10,4 @@ estaRobertoCarlos red = aux (usuarios red)
     aux (u:us) = masDeUnMillonDeAmigos red u || aux us
 
 masDeUnMillonDeAmigos :: RedSocial -> Usuario -> Bool
-masDeUnMillonDeAmigos red u = cantidadDeAmigos red u >= 10
+masDeUnMillonDeAmigos red u = cantidadDeAmigos red u > 10
