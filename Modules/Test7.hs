@@ -37,6 +37,7 @@ testPublicacionesQueLeGustanA = test
       publicacionesQueLeGustanA ([usuario1], [], [publicacion1_4]) usuario1 ~?= []
 
     , "Red con una publicación que le gusta al usuario" ~:
+
       publicacionesQueLeGustanA ([usuario1], [], [publicaciontest7_1]) usuario1 ~?= [publicaciontest7_1]
 
     , "Red con múltiples publicaciones que le gustan al usuario" ~:
