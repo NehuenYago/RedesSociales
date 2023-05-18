@@ -30,3 +30,6 @@ verificaElementosEnComun (l:ls) = interseccion l (verificaElementosEnComun ls)
 -- determina si una lista de listas tiene elementos en comun en todas las sublistas
 tieneElementosEnComun :: (Eq a) => [[a]] -> Bool
 tieneElementosEnComun listaDeListas = not (longitud (verificaElementosEnComun listaDeListas) == 0)
+
+remueveAutoLikes :: [Publicacion] -> [Publicacion]
+remueveAutoLikes = undefined
