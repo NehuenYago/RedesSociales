@@ -1,5 +1,5 @@
 -- Template para archivos de testing
-module Modules.Test9 where
+module Modules.Test10 where
 
 -- Funciones y ejemplos
 import Modules.FuncionesBase
@@ -63,7 +63,7 @@ red10_5 = (usuarios10, relaciones10_5, publicaciones10)
 red10_6 = (usuarios10, relaciones10_6, publicaciones10)
 red10_7 = (usuarios10, relaciones10_7, publicaciones10)
 
-test9 = test [
+test10 = test [
     "Red sin relaciones" ~: existeSecuenciaDeAmigos red10_1 usuario10_1 usuario10_12 ~?= False,
     "Red con una relacion, sin los usuarios dados" ~: existeSecuenciaDeAmigos red10_2 usuario10_1 usuario10_12 ~?= False,
     "Red con una relacion directa entre los usuarios dados" ~: existeSecuenciaDeAmigos red10_3 usuario10_1 usuario10_12 ~?= True,
@@ -73,4 +73,4 @@ test9 = test [
     "Red con multiples relaciones, con una relacion indirecta entre los usuarios dados" ~: existeSecuenciaDeAmigos red10_7 usuario10_1 usuario10_12 ~?= True
  ]
 
-main = runTestTT test9
+main = runTestTT test10
