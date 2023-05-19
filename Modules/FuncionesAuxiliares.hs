@@ -27,6 +27,13 @@ devuelveElemento :: [t] -> Int -> t
 devuelveElemento (x:_) 0 = x
 devuelveElemento (x:xs) n = devuelveElemento xs (n-1)
 
+-- quita un elemento de una lista
+quitar :: (Eq t) => t -> [t] -> [t]
+quitar _ [] = []
+quitar y (x:xs) 
+    | y == x = xs
+    | otherwise = x : quitar y xs
+
 -- elimina todos los elementos e de la lista (x:xs)
 quitarTodos :: (Eq t) => t -> [t] -> [t]
 quitarTodos _ [] = []
@@ -54,19 +61,3 @@ primeroDeDupla (x, y) = x
 --devuleve el segundo de una dupla
 segundoDeDupla :: (tx, ty) -> ty
 segundoDeDupla (x, y) = y
-
--- toma una lista de listas y devuelve una lista con los elementos comunes a todas
-verificaElementosEnComun :: (Eq a) => [[a]] -> [a]
-verificaElementosEnComun [] = []
-verificaElementosEnComun [l] = l
-verificaElementosEnComun (l:ls) = interseccion l (verificaElementosEnComun ls)
-    where
-        -- devuelve la interseccion (los elementos comunes) entre dos listas
-        interseccion [] _ = []
-        interseccion (x:xs) ys 
-            | pertenece x ys = x : interseccion xs ys
-            | otherwise = interseccion xs ys
-
--- determina si una lista de listas tiene elementos en comun en todas las sublistas
-tieneElementosEnComun :: (Eq a) => [[a]] -> Bool
-tieneElementosEnComun listaDeListas = not (longitud (verificaElementosEnComun listaDeListas) == 0)
