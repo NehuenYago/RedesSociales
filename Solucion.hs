@@ -3,10 +3,10 @@ module Solucion where
 -- Completar con los datos del grupo
 --
 -- Nombre de Grupo: Algorritmos
--- Integrante 1: Nombre Apellido, email, LU
--- Integrante 2: Nombre Apellido, email, LU
--- Integrante 3: Nombre Apellido, email, LU
--- Integrante 4: Nombre Apellido, email, LU
+-- Integrante 1: Bruno Bazzan, brunobazzan@gmail.com, 448/17
+-- Integrante 2: Ignacio Gaspar Cerizola, gasparcerizola@gmail.com, 405/17
+-- Integrante 3: Nehuen Yago Romero Abuin, nehuenromeroabuin@gmail.com, 607/23
+-- Integrante 4: Tadeo Vardanega, tadeo.vardanega@gmail.com, 961/22
 
 type Usuario = (Integer, String) -- (id, nombre)
 type Relacion = (Usuario, Usuario) -- usuarios que se relacionan
