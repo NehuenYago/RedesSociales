@@ -8,10 +8,11 @@ import Modules.FuncionesAuxiliares
 -- si en cada lista de likes de cada publicacion encuentro a un mismo usuario entonces este ultimo es un seguidor fiel del primero
 
 tieneUnSeguidorFiel :: RedSocial -> Usuario -> Bool
-tieneUnSeguidorFiel red us = tieneElementosEnComun (listaDeLikes (publicacionesDe red us))
+tieneUnSeguidorFiel red us = tieneElementosEnComun (remueveAutoLikes (listaDeLikes (publicacionesDe red us)) us)
 
 -- me devuelve una lista de listas de likes de las publiaciones del usuario
 listaDeLikes :: [Publicacion] -> [[Usuario]]
+listaDeLikes [] = []
 listaDeLikes [(_, _, lk)] = [lk]
 listaDeLikes ((_, _, lk) : xs) = lk : listaDeLikes xs
 
@@ -31,5 +32,9 @@ verificaElementosEnComun (l:ls) = interseccion l (verificaElementosEnComun ls)
 tieneElementosEnComun :: (Eq a) => [[a]] -> Bool
 tieneElementosEnComun listaDeListas = not (longitud (verificaElementosEnComun listaDeListas) == 0)
 
-remueveAutoLikes :: [Publicacion] -> [Publicacion]
-remueveAutoLikes = undefined
+-- saca de las listas de like al autor de la publicacion
+remueveAutoLikes :: [[Usuario]] -> Usuario -> [[Usuario]]
+remueveAutoLikes [] u = []
+remueveAutoLikes (x:xs) u 
+    | pertenece u x = quitar u x : remueveAutoLikes xs u
+    | otherwise = x:remueveAutoLikes xs u
