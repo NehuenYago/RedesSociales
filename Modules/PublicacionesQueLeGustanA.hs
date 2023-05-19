@@ -1,7 +1,7 @@
 module Modules.PublicacionesQueLeGustanA where
 import Modules.FuncionesBase
 import Modules.FuncionesAuxiliares
-
+import Modules.Ejemplos
 -- le envia a tomaPublicacion la lista de publicaciones de la red y elimina los repetidos de la lista de
 -- publicaciones que recibe
 publicacionesQueLeGustanA :: RedSocial -> Usuario -> [Publicacion]
@@ -21,3 +21,14 @@ buscaLikes listaPublicaciones n (_, _, []) usuario = tomaPublicacion listaPublic
 buscaLikes listaPublicaciones n (u, post, l:ls) usuario
  | l == usuario = (devuelveElemento listaPublicaciones n) : tomaPublicacion listaPublicaciones usuario (n+1)
  | otherwise = buscaLikes listaPublicaciones n (u, post, ls) usuario
+
+
+publicacionesQueLeGustanA2 :: RedSocial -> Usuario -> [Publicacion]
+publicacionesQueLeGustanA2 (us,rels,pubs) u = eliminarRepetidos ( publicacionesQueLeGustanA2Aux pubs u)
+
+publicacionesQueLeGustanA2Aux :: [Publicacion] -> Usuario -> [Publicacion]
+publicacionesQueLeGustanA2Aux [] _ = []
+publicacionesQueLeGustanA2Aux ((autor,texto,likes):pubs) u 
+    | pertenece u likes = (autor,texto,likes) : publicacionesQueLeGustanA2Aux pubs u
+    | otherwise = publicacionesQueLeGustanA2Aux pubs u
+ 
