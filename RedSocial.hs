@@ -1,4 +1,4 @@
-module Solucion where
+module RedSocial where
 
 type Usuario = (Integer, String) -- (id, nombre)
 type Relacion = (Usuario, Usuario) -- usuarios que se relacionan

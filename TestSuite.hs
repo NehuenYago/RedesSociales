@@ -1,5 +1,5 @@
 import Test.HUnit
-import Solucion
+import RedSocial
 
 usuario1 = (1, "Juan")
 usuario2 = (2, "Natalia")
