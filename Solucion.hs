@@ -1,13 +1,5 @@
 module Solucion where
 
--- Completar con los datos del grupo
---
--- Nombre de Grupo: Algorritmos
--- Integrante 1: Nombre Apellido, email, LU
--- Integrante 2: Nombre Apellido, email, LU
--- Integrante 3: Nombre Apellido, email, LU
--- Integrante 4: Nombre Apellido, email, LU
-
 type Usuario = (Integer, String) -- (id, nombre)
 type Relacion = (Usuario, Usuario) -- usuarios que se relacionan
 type Publicacion = (Usuario, String, [Usuario]) -- (usuario que publica, texto publicacion, likes)
@@ -39,7 +31,7 @@ likesDePublicacion (_, _, us) = us
 -- Ejercicios
 
 -- Ej 1
--- Devuelve una lista con los nombres de usuario de los usuarios de una red
+-- Dada una red social devuelve una lista con los nombres de los usuarios sin repetir
 nombresDeUsuarios :: RedSocial -> [String]
 nombresDeUsuarios red = eliminarRepetidos (extraeNombresDeUsuario (usuarios red))
 
@@ -48,11 +40,13 @@ extraeNombresDeUsuario [] = []
 extraeNombresDeUsuario (x:xs) = nombreDeUsuario x : extraeNombresDeUsuario xs 
 
 -- Ej 2
--- Devuelve una lista con los usuarios que tienen relaciones con el usuario dado
--- en la red dada
+-- Dada una red social y un usuario devuelve una lista con los usuarios que 
+-- tienen una relacion con dicho usuario
 amigosDe :: RedSocial -> Usuario -> [Usuario]
 amigosDe (usrs, rels, pubs) us = amigosDeAux rels us 
 
+-- Dada una lista de relaciones y un usuario devuelve una lista con los usuarios
+-- que tienen una relacion con dicho usuario 
 amigosDeAux :: [Relacion] -> Usuario -> [Usuario]
 amigosDeAux [] _ = []
 amigosDeAux (rel:rels) us
@@ -64,25 +58,26 @@ amigosDeAux (rel:rels) us
         us2 = segundoDeDupla rel
 
 -- Ej 3
--- Devuelve la cantidad de usuarios que tienen relaciones con el usuario dado
--- en la red dada
+-- Dada una red social y un usuario devuelve la cantidad de usuarios que tienen
+-- una relacion con dicho usuario
 cantidadDeAmigos :: RedSocial -> Usuario -> Int
 cantidadDeAmigos red u = longitud (amigosDe red u)
 
 -- Ej 4
--- Devuelve el usuario con la mayor cantidad de amigos en una red dada
+-- Dada una red social devuelve el usuario con la mayor cantidad de amigos
 usuarioConMasAmigos :: RedSocial -> Usuario
 usuarioConMasAmigos ([], _, _) = error "La red social no tiene usuarios"
 usuarioConMasAmigos (u : us, rels, pubs) = maximaCantidadDeAmigos (cantidadDeAmigosPorUsuario (u : us, rels, pubs))
 
--- Devuelve una lista de tuplas donde el segundo elemento es un usuario de la red
--- y el primer elemento es la cantidad de amigos de ese usuario
+-- Dada una red social devuelve una lista de tuplas donde el segundo elemento 
+-- es un usuario de la red y el primer elemento es la cantidad de amigos de ese usuario
 cantidadDeAmigosPorUsuario :: RedSocial -> [(Int, Usuario)]
 cantidadDeAmigosPorUsuario ([], _, _) = []
 cantidadDeAmigosPorUsuario ([u], rels, pubs) = [(cantidadDeAmigos ([u], rels, pubs) u, u)]
 cantidadDeAmigosPorUsuario (u : us, rels, pubs) = (cantidadDeAmigos (u : us, rels, pubs) u, u) : cantidadDeAmigosPorUsuario (us, rels, pubs)
 
--- Devuelve el usuario con la mayor cantidad de amigos dada una lista de tuplas (cantidadDeAmigos, Usuario)
+-- Dada una lista de tuplas (cantidadDeAmigos, Usuario) devueve el usuario que 
+-- tiene la mayor cantidad de amigos
 maximaCantidadDeAmigos :: [(Int, Usuario)] -> Usuario
 maximaCantidadDeAmigos [] = error "La lista de tuplas está vacía"
 maximaCantidadDeAmigos [(_, u)] = u
@@ -91,25 +86,25 @@ maximaCantidadDeAmigos ((n1, u1) : (n2, u2) : xs)
     | otherwise = maximaCantidadDeAmigos ((n2, u2) : xs)
 
 -- Ej 5
--- Devuelve True si en la red dada existe un usuario que tenga más de 10 amigos
+-- Dada una red social devuelve True si existe un usuario que tenga más de 10 amigos
 estaRobertoCarlos :: RedSocial -> Bool
 estaRobertoCarlos red = aux (usuarios red)
   where
     aux [] = False
     aux (u:us) = masDeUnMillonDeAmigos red u || aux us
 
--- Devlueve True si el usuario dado en la red dada tiene más de 10 amigos 
+-- Dada una red social y un usuario devuelve True si dicho usuario tiene más de 10 amigos 
 masDeUnMillonDeAmigos :: RedSocial -> Usuario -> Bool
 masDeUnMillonDeAmigos red u = cantidadDeAmigos red u > 10
 
 -- Ej 6
--- Devuelve una lista con las publicaciones que tienen como autor el usuario
--- en la red dada
+-- Dada una red social y un usuario devuelve una lista con las publicaciones 
+-- que tienen como autor dicho usuario, sin repetidos.
 publicacionesDe :: RedSocial -> Usuario -> [Publicacion]
 publicacionesDe (us,rels,pubs) u = eliminarRepetidos (publicacionesDeAux pubs u)
 
--- Devuelve una lsita con las publicaciones de la lista de publicaciones dada
--- que tienen como autor el usuario dado
+-- Dada una lista de publicaciones y un usuario devuelve una lista con las 
+-- publicaciones que tienen como autor a dicho usuario
 publicacionesDeAux :: [Publicacion] -> Usuario -> [Publicacion]
 publicacionesDeAux [] _ = []
 publicacionesDeAux ((uPub,text,likes):pubs) u 
@@ -117,13 +112,13 @@ publicacionesDeAux ((uPub,text,likes):pubs) u
     | otherwise = publicacionesDeAux pubs u 
 
 -- Ej 7
--- Devuelve una lista con las publicaciones de la red dada que en sus lista de
--- usuarios que le dieron like se encuentra el usuario dado
+-- Dada una red social y un usuario devuelve una lista con las publicaciones 
+-- que le gustan a dicho usuario, sin repetidos.
 publicacionesQueLeGustanA :: RedSocial -> Usuario -> [Publicacion]
 publicacionesQueLeGustanA (us,rels,pubs) u = eliminarRepetidos ( publicacionesQueLeGustanAAux pubs u)
 
--- Devuelve una lista con las publicaciones dadas que en sus lista de
--- usuarios que le dieron like se encuentra el usuario dado
+-- Dada una lista de publicaciones y un usuario devuelve una lista con las publicaciones 
+-- que le gustan a dicho usuario.
 publicacionesQueLeGustanAAux :: [Publicacion] -> Usuario -> [Publicacion]
 publicacionesQueLeGustanAAux [] _ = []
 publicacionesQueLeGustanAAux ((autor,texto,likes):pubs) u 
@@ -131,19 +126,19 @@ publicacionesQueLeGustanAAux ((autor,texto,likes):pubs) u
     | otherwise = publicacionesQueLeGustanAAux pubs u
 
 -- Ej 8
--- Devuelve True si los dos usuarios dados se encuentran en las mismas listas 
--- de usuarios que le dieron like de las publicaciones de la red
+-- Dada una red social y dos usuarios devuelve True si a ambos le gustan las
+-- mismas pubicaciones
 lesGustanLasMismasPublicaciones :: RedSocial -> Usuario -> Usuario -> Bool
 lesGustanLasMismasPublicaciones red u1 u2 = mismosElementos (publicacionesQueLeGustanA red u1) (publicacionesQueLeGustanA red u2)
 
--- Ej test9
--- Devuelve True si existe en la red dada un usuario que le haya dado like 
--- a todas las publiaciones del usuario dado
+-- Ej 9
+-- Dada una red social y un usuario devuelve True si existe algun otro usuario que le 
+-- haya dado like a todas las publiaciones del primero
 tieneUnSeguidorFiel :: RedSocial -> Usuario -> Bool
-tieneUnSeguidorFiel red us = tieneElementosEnComun (remueveAutoLikes (listaDeLikes (publicacionesDe red us)) us)
+tieneUnSeguidorFiel red us = tienenElementosEnComun (remueveAutoLikes (listaDeLikes (publicacionesDe red us)) us)
 
--- Devuelve una lista de listas de usuarios que le dieron like a las publicaciones
--- en la lista de publicaciones dada
+-- Dada una lista de publicaciones devuelve una lista de las listas de usuarios 
+-- que le dieron like a cada publicacion
 listaDeLikes :: [Publicacion] -> [[Usuario]]
 listaDeLikes [] = []
 listaDeLikes [(_, _, lk)] = [lk]
@@ -156,22 +151,38 @@ remueveAutoLikes (x:xs) u
     | pertenece u x = quitar u x : remueveAutoLikes xs u
     | otherwise = x:remueveAutoLikes xs u
 
+-- Dada una lista de listas, devuelve True si las sublistas tienen al menos un elemento en común.
+tienenElementosEnComun :: (Eq a) => [[a]] -> Bool
+tienenElementosEnComun listaDeListas = not (longitud (verificaElementosEnComun listaDeListas) == 0)
+
+-- Dada una lista de listas devuelve una lista con los elementos comunes a todas
+verificaElementosEnComun :: (Eq a) => [[a]] -> [a]
+verificaElementosEnComun [] = []
+verificaElementosEnComun [l] = l
+verificaElementosEnComun (l:ls) = interseccion l (verificaElementosEnComun ls)
+    where
+        -- devuelve la interseccion (los elementos comunes) entre dos listas
+        interseccion [] _ = []
+        interseccion (x:xs) ys 
+            | pertenece x ys = x : interseccion xs ys
+            | otherwise = interseccion xs ys
+
 -- Ej 10
--- Devuelve True si en una red dada los usuarios dados están relacionados
--- mediante relaciones directas o indirectas de cualquier grado. 
+-- Dada una red social y dos usuarios devuelve True si ambos están relacionados
+-- directamente o a traves de una secuencia de amigos. 
 existeSecuenciaDeAmigos :: RedSocial -> Usuario -> Usuario -> Bool
 existeSecuenciaDeAmigos red us1 us2
     | pertenece us2 (circuloDeAmigos red us1) = True 
     | otherwise = False
 
--- Devuelve una lista de usuarios relacionados con el usuario dado mediante 
--- relaciones directas o indirectas de cualquier grado  
+-- Dada una red social y un usuario devuelve una lista de usuarios relacionados 
+-- a este directamente o a traves de otros usuarios. 
 circuloDeAmigos :: RedSocial -> Usuario -> [Usuario]
 circuloDeAmigos red us = expandirCirculoDeAmigos red [us] []
 
--- Dada una lista de usuarios aExpandir recuarsivamente concatena al resultado
--- los amigos de los usuarios aExpandir. En cada recursión además se agregan 
--- dichos amigos a la lista aExpandir, y el usuario expandido a la lista expandidos.
+-- Dada una red social y dos listas de usuarios, aExpandir y expandidos, devuelve
+-- una lista de usuarios relacionados a los de la primera lista, ya sea mediante
+-- relaciones directas o a traves de otros usuarios.
 expandirCirculoDeAmigos :: RedSocial -> [Usuario] -> [Usuario] -> [Usuario]
 expandirCirculoDeAmigos red [] expandidos = []
 expandirCirculoDeAmigos red aExpandir expandidos 
@@ -183,7 +194,7 @@ expandirCirculoDeAmigos red aExpandir expandidos
         aExpandirSinUsConAmigos = unirSinRepetidos aExpandirSinUs (amigosDe red us)
         expandidosConUs = agregarSinRepetidos us expandidos
 
--- funciones que se usan en mas de un ejercicion y/o estan, por ejemplo, en las guias
+-- Funciones que se usan en mas de un ejercicion y/o estan, por ejemplo, en las guias
 
 -- ve si dos listas tienen los mismos elementos
 mismosElementos :: (Eq t) => [t] -> [t] -> Bool
@@ -244,19 +255,3 @@ primeroDeDupla (x, y) = x
 --devuleve el segundo de una dupla
 segundoDeDupla :: (tx, ty) -> ty
 segundoDeDupla (x, y) = y
-
--- Toma una lista de listas y devuelve una lista con los elementos comunes a todas
-verificaElementosEnComun :: (Eq a) => [[a]] -> [a]
-verificaElementosEnComun [] = []
-verificaElementosEnComun [l] = l
-verificaElementosEnComun (l:ls) = interseccion l (verificaElementosEnComun ls)
-    where
-        -- devuelve la interseccion (los elementos comunes) entre dos listas
-        interseccion [] _ = []
-        interseccion (x:xs) ys 
-            | pertenece x ys = x : interseccion xs ys
-            | otherwise = interseccion xs ys
-
--- Devuelve veradero si dada una lista de listas, las sublistas tienen al menos un elemento en común.
-tieneElementosEnComun :: (Eq a) => [[a]] -> Bool
-tieneElementosEnComun listaDeListas = not (longitud (verificaElementosEnComun listaDeListas) == 0)

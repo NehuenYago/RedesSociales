@@ -1,7 +1,7 @@
 module Modules.AmigosDe where
 import Modules.FuncionesBase
 import Modules.FuncionesAuxiliares
-import Test.HUnit
+
 amigosDe :: RedSocial -> Usuario -> [Usuario]
 amigosDe (usrs, rels, pubs) us = amigosDeAux rels us 
 
